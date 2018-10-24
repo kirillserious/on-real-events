@@ -5,38 +5,38 @@ def index(request):
     return render(request, 'real_events/index.html')
 
 def all_news(request):
-    return HttpResponse("all_news")
+    return render(request, 'real_events/all_news.html')
 def news_post(request, news_post_slug):
-    return HttpResponse("news_post")
+    return render(request, 'real_events/news_post.html')
 
 def all_places(request):
-    return HttpResponse("all_places")
+    return render(request, 'real_events/all_places.html')
 def place(request, place_slug):
-    return HttpResponse("place")
+    return render(request, 'real_events/place.html')
 
 def all_meetings(request):
-    return HttpResponse("all_meetings")
+    return render(request, 'real_events/all_meetings.html')
 def meeting(request, meeting_slug):
-    return HttpResponse("meeting")
+    return render(request, 'real_events/meeting.html')
 
 def all_referees(request):
-    return HttpResponse("all_referees")
+    return render(request, 'real_events/all_referees.html')
 def referee(request, referee_slug):
-    return HttpResponse("referee")
+    return render(request, 'real_events/referee.html')
 
 def all_teams(request):
-    return HttpResponse("all_teams")
+    return render(request, 'real_events/all_teams.html')
 def team(request, team_slug):
-    return HttpResponse("team")
+    return render(request, 'real_events/team.html')
 
 def all_members(request):
-    return HttpResponse("all_members")
+    return render(request, 'real_events/all_members.html')
 def member(request, member_slug):
-    return HttpResponse("member")
+    return render(request, 'real_events/member.html')
 
 def all_staff(request):
-    return HttpResponse("all_staff")
+    return render(request, 'real_events/all_staff.html')
 def staff(request, place_slug):
-    return HttpResponse("staff")
+    return render(request, 'real_events/staff.html')
 
 
