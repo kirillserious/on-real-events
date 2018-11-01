@@ -5,5 +5,16 @@
 {% endblock %}
 
 {% block body_block %}
-    Член жюри
+    <div>
+        {{ obj.name }}
+        {% if obj.link %}
+            {{ obj.link }}
+        {% endif %}
+        {% if obj.photo %}
+            <img src="{{obj.photo.url}}" />
+        {% endif %}
+        {% if obj.info %}
+            {{ obj.info }}
+        {% endif %}
+    </div>
 {% endblock %}

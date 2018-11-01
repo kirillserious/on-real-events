@@ -1,42 +1,79 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+
+from real_events_app.models import Profession, Place, Meeting, Staff, Referee, Member, Team, NewsPost
+
+def __get_model_by_slag(object, slug):
+    try:
+        return object.objects.get(slug=slug)
+    except:
+        raise Http404("")
 
 def index(request):
     return render(request, 'real_events/index.html')
 
 def all_news(request):
-    return render(request, 'real_events/all_news.html')
-def news_post(request, news_post_slug):
-    return render(request, 'real_events/news_post.html')
+    context_dict = {}
+    context_dict['obj'] = NewsPost.objects.all()
+    return render(request, 'real_events/all_news.html', context_dict)
+def news_post(request, slug):
+    context_dict = {}
+    context_dict['obj'] = __get_model_by_slag(NewsPost, slug)
+    return render(request, 'real_events/news_post.html', context_dict)
 
 def all_places(request):
-    return render(request, 'real_events/all_places.html')
-def place(request, place_slug):
-    return render(request, 'real_events/place.html')
+    context_dict = {}
+    context_dict['obj'] = Place.objects.all()
+    return render(request, 'real_events/all_places.html', context_dict)
+def place(request, slug):
+    context_dict = {}
+    context_dict['obj'] = __get_model_by_slag(Place, slug)
+    return render(request, 'real_events/place.html', context_dict)
 
 def all_meetings(request):
-    return render(request, 'real_events/all_meetings.html')
-def meeting(request, meeting_slug):
-    return render(request, 'real_events/meeting.html')
+    context_dict = {}
+    context_dict['obj'] = Meeting.objects.all()
+    return render(request, 'real_events/all_meetings.html', context_dict)
+def meeting(request, slug):
+    context_dict = {}
+    context_dict['obj'] = __get_model_by_slag(Meeting, slug)
+
+    return render(request, 'real_events/meeting.html', context_dict)
 
 def all_referees(request):
-    return render(request, 'real_events/all_referees.html')
-def referee(request, referee_slug):
-    return render(request, 'real_events/referee.html')
+    context_dict = {}
+    context_dict['obj'] = Referee.objects.all()
+    return render(request, 'real_events/all_referees.html', context_dict)
+def referee(request, slug):
+    context_dict = {}
+    context_dict['obj'] = __get_model_by_slag(Referee, slug)
+    return render(request, 'real_events/referee.html', context_dict)
 
 def all_teams(request):
-    return render(request, 'real_events/all_teams.html')
-def team(request, team_slug):
-    return render(request, 'real_events/team.html')
+    context_dict = {}
+    context_dict['obj'] = Team.objects.all()
+    return render(request, 'real_events/all_teams.html', context_dict)
+def team(request, slug):
+    context_dict = {}
+    context_dict['obj'] = __get_model_by_slag(Team, slug)
+    return render(request, 'real_events/team.html', context_dict)
 
 def all_members(request):
-    return render(request, 'real_events/all_members.html')
-def member(request, member_slug):
-    return render(request, 'real_events/member.html')
+    context_dict = {}
+    context_dict['obj'] = Member.objects.all()
+    return render(request, 'real_events/all_members.html', context_dict)
+def member(request, slug):
+    context_dict = {}
+    context_dict['obj'] = __get_model_by_slag(Member, slug)
+    return render(request, 'real_events/member.html', context_dict)
 
 def all_staff(request):
-    return render(request, 'real_events/all_staff.html')
-def staff(request, place_slug):
-    return render(request, 'real_events/staff.html')
+    context_dict = {}
+    context_dict['obj'] = Staff.objects.all()
+    return render(request, 'real_events/all_staff.html', context_dict)
+def staff(request, slug):
+    context_dict = {}
+    context_dict['obj'] = __get_model_by_slag(Staff, slug)
+    return render(request, 'real_events/staff.html', context_dict)
 
 

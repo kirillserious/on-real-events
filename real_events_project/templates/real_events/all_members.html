@@ -5,5 +5,25 @@
 {% endblock %}
 
 {% block body_block %}
-    Все участники
+    {% for c in obj %}
+    <div>
+        <a href="{% url 'member' c.slug %}">{{ c.name }}</a>
+        {% for team in c.teams.all %}
+            <b>{{team.title}} </b>
+        {% endfor %}
+        <br/>
+        {% for proff in c.professions.all %}
+            <b>{{proff.title}} </b>
+        {% endfor %}
+        {% if c.link %}
+            {{ c.link }}
+        {% endif %}
+        {% if c.photo %}
+            <img src="{{c.photo.url}}" />
+        {% endif %}
+        {% if c.info %}
+            {{ c.info }}
+        {% endif %}
+    </div>
+    {% endfor %}
 {% endblock %}

@@ -5,5 +5,19 @@
 {% endblock %}
 
 {% block body_block %}
-    Все мероприятия
+    {% for c in obj %}
+    <div>
+        <a href="{% url 'meeting' c.slug %}">{{ c.title }}</a>
+        {% for place in c.places.all %}
+            <b>{{place.title}} </b>
+        {% endfor %}
+        {{ c.date }}
+        {% if c.photo %}
+            <img src="{{c.photo.url}}" />
+        {% endif %}
+        {% if c.info %}
+            {{ c.info }}
+        {% endif %}
+    </div>
+    {% endfor %}
 {% endblock %}

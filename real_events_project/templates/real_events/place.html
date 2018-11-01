@@ -5,5 +5,22 @@
 {% endblock %}
 
 {% block body_block %}
-    Площадка
+    <div>
+        {{ obj.title }}
+        {% if obj.photo %}
+            <img src="{{obj.photo.url}}" />
+        {% endif %}
+        {% if obj.address %}
+            {{ obj.address }}
+        {% endif %}
+        {% if obj.city %}
+            {{ obj.city }}
+        {% endif %}
+        {% if obj.info %}
+            {{ obj.info }}
+        {% endif %}
+        {% if obj.post %}
+            {{ obj.post | safe}}
+        {% endif %}
+    </div>
 {% endblock %}

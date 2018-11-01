@@ -5,5 +5,19 @@
 {% endblock %}
 
 {% block body_block %}
-    Все команды
+    {% for c in obj %}
+    <div>
+        <a href="{% url 'team' c.slug %}">{{ c.title }}</a>
+        {% for meeting in c.meetings.all %}
+            <b>{{meeting.title}} </b>
+        {% endfor %}
+        <br/>
+        {% if c.photo %}
+            <img src="{{c.photo.url}}" />
+        {% endif %}
+        {% if c.info %}
+            {{ c.info }}
+        {% endif %}
+    </div>
+    {% endfor %}
 {% endblock %}

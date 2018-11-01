@@ -5,5 +5,20 @@
 {% endblock %}
 
 {% block body_block %}
-    Мероприятие
+    <div>
+        <a href="{% url 'meeting' obj.slug %}">{{ c.title }}</a>
+        {% for place in obj.places.all %}
+            <b>{{place.title}} </b>
+        {% endfor %}
+        {{ obj.date }}
+        {% if obj.photo %}
+            <img src="{{c.photo.url}}" />
+        {% endif %}
+        {% if obj.info %}
+            {{ obj.info }}
+        {% endif %}
+        {% if obj.post %}
+            {{ obj.post | safe}}
+        {% endif %}
+    </div>
 {% endblock %}

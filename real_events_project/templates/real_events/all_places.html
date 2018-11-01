@@ -5,5 +5,21 @@
 {% endblock %}
 
 {% block body_block %}
-    Все площадки
+    {% for c in obj %}
+    <div>
+        <a href="{% url 'place' c.slug %}">{{ c.title }}</a>
+        {% if c.photo %}
+            <img src="{{c.photo.url}}" />
+        {% endif %}
+        {% if c.address %}
+            {{ c.address }}
+        {% endif %}
+        {% if c.city %}
+            {{ c.city }}
+        {% endif %}
+        {% if c.info %}
+            {{ c.info }}
+        {% endif %}
+    </div>
+    {% endfor %}
 {% endblock %}
