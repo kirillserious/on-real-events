@@ -56,13 +56,23 @@ def all_teams(request):
 def team(request, slug):
     context_dict = {}
     context_dict['obj'] = __get_model_by_slag(Team, slug)
+    context_dict['members'] = Member.objects.filter(teams__slug=slug).distinct()
     return render(request, 'real_events/team.html', context_dict)
 
 def all_members(request):
     context_dict = {}
-    context_dict['obj'] = Member.objects.all()
+
+    proff = request.GET.get("proff", "")
+    if proff == "":
+        context_dict['obj'] = Member.objects.all()
+    else:
+        obj = Member.objects.filter(professions__slug=proff).distinct()
+        if obj.count() > 0:
+            context_dict['obj'] = obj
+        else:
+            raise Http404("")
     return render(request, 'real_events/all_members.html', context_dict)
-def member(request, slug):
+def member(request, slug):   
     context_dict = {}
     context_dict['obj'] = __get_model_by_slag(Member, slug)
     return render(request, 'real_events/member.html', context_dict)

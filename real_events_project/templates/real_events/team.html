@@ -6,7 +6,7 @@
 
 {% block body_block %}
     <div>
-        <a href="{% url 'team' c.slug %}">{{ obj.name }}</a>
+        {{ obj.title }}
         {% for meeting in obj.meetings.all %}
             <b>{{meeting.title}} </b>
         {% endfor %}
@@ -20,5 +20,11 @@
         {% if obj.post %}
             {{ obj.post | safe}}
         {% endif %}
+        Участники:
+        <ul>
+            {% for member in members %}
+            <li><a href="{% url 'member' member.slug %}">{{member.name}}</a></li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}

@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block body_block %}
+        <ul>
+            <li><a href="{% url 'all_members' %}?proff=poet">Поэты</a></li>
+            <li><a href="{% url 'all_members'%}?proff=actor">Актёры</a></li>
+            <li><a href="{% url 'all_members' %}?proff=director">Режиссеры</a></li>
+        </ul>
     {% for c in obj %}
     <div>
         <a href="{% url 'member' c.slug %}">{{ c.name }}</a>
