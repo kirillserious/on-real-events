@@ -1,9 +1,26 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block title_block %}
     Индекс
 {% endblock %}
 
+{% block header_image %}{%static 'img/bg-masthead.jpg'%}{% endblock %}
+{% block header_min_height %}15{% endblock %}
+
+{% block header_content %}
+<h1 class="mx-auto my-0 text-uppercase">
+    Реальные события
+</h1>
+<h2 class="text-white-50 mx-auto mt-2 mb-5">
+    Основано на реальных событиях, реальными событиями, чтобы реально событиться.
+</h2>
+<a href="#about" class="btn btn-primary js-scroll-trigger">
+    Что это?
+</a>
+{% endblock %}
+
 {% block body_block %}
-    Индекс наполнение
+Наполнение
 {% endblock %}

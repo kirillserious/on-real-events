@@ -1,7 +1,18 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block title_block %}
     Все новости
+{% endblock %}
+
+{% block header_image %}{%static 'img/bg-signup.jpg'%}{% endblock %}
+{% block header_min_height %}15em{% endblock %}
+{% block header_height %}auto{% endblock %}
+{% block header_content %}
+<h1 class="mx-auto my-0 text-uppercase" style="padding-top: 1em">
+    Новости
+</h1>
 {% endblock %}
 
 {% block body_block %}
