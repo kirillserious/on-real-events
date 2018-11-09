@@ -6,7 +6,6 @@
     Все новости
 {% endblock %}
 
-{% block header_image %}{%static 'img/bg-signup.jpg'%}{% endblock %}
 {% block header_min_height %}15em{% endblock %}
 {% block header_height %}auto{% endblock %}
 {% block header_content %}
@@ -16,6 +15,34 @@
 {% endblock %}
 
 {% block body_block %}
+  {% for c in obj %}
+<section style="padding-top: 0rem;" class="overlay">
+
+  {% if c.photo %}
+  <div class="background-img" style="background:url({{c.photo.url}});background-position:center;background-repeat:no-repeat;background-attachment:scroll;background-size:cover; min-height: 30em">
+    <div class="container">
+    <div class="row">
+      <div class="col-md-5" style="margin: 20px">
+        <div class="block-content front-p shadow"  style="background-color:white; opacity: 0.8; border:0;border-bottom:.25rem solid #64a19d">
+            <h1><a href="{% url 'news_post' c.slug %}">{{ c.title }}</a></h1>
+        {% for place in c.places.all %}
+            <b>{{place.title}} </b>
+        {% endfor %}
+        {{ c.date }}
+        {% if c.info %}
+            {{ c.info }}
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  {% endif %}
+  
+
+</section>
+  {% endfor %}
+<!--
     {% for c in obj %}
     <div>
         <a href="{% url 'news_post' c.slug %}">{{ c.title }}</a>
@@ -30,5 +57,5 @@
             {{ c.info }}
         {% endif %}
     </div>
-    {% endfor %}
+    {% endfor %}-->
 {% endblock %}

@@ -6,7 +6,6 @@
     Все участники
 {% endblock %}
 
-{% block header_image %}{%static 'img/bg-signup.jpg'%}{% endblock %}
 {% block header_min_height %}15em{% endblock %}
 {% block header_height %}auto{% endblock %}
 {% block header_content %}
@@ -16,30 +15,68 @@
 {% endblock %}
 
 {% block body_block %}
-        <ul>
-            <li><a href="{% url 'all_members' %}?proff=poet">Поэты</a></li>
-            <li><a href="{% url 'all_members'%}?proff=actor">Актёры</a></li>
-            <li><a href="{% url 'all_members' %}?proff=director">Режиссеры</a></li>
-        </ul>
-    {% for c in obj %}
-    <div>
-        <a href="{% url 'member' c.slug %}">{{ c.name }}</a>
-        {% for team in c.teams.all %}
-            <b>{{team.title}} </b>
-        {% endfor %}
-        <br/>
-        {% for proff in c.professions.all %}
-            <b>{{proff.title}} </b>
-        {% endfor %}
-        {% if c.link %}
-            {{ c.link }}
-        {% endif %}
-        {% if c.photo %}
-            <img src="{{c.photo.url}}" />
-        {% endif %}
-        {% if c.info %}
-            {{ c.info }}
-        {% endif %}
-    </div>
-    {% endfor %}
+<section id="about" class="about-section text-center" style="padding-top: 5rem;">
+      <div class="container">
+        <div class="btn-group" role="group" aria-label="Basic example" style="opacity: 0.6">
+          <a
+              class="btn {% if request.GET.proff == 'poet'%} btn-primary {% else %} btn-light {% endif %}"
+              href="{% url 'all_members' %}?proff=poet">
+            Поэты
+          </a>
+          <a class="btn {% if request.GET.proff == 'actor'%} btn-primary {% else %} btn-light {% endif %}" href="{% url 'all_members'%}?proff=actor">
+            Актёры
+          </a>
+          <a class="btn {% if request.GET.proff == 'director'%} btn-primary {% else %} btn-light {% endif %}" href="{% url 'all_members' %}?proff=director">
+            Режиссеры
+          </a>
+        </div>
+
+        <div class="card-columns" style="padding-top: 3rem; opacity: 0.9">
+          {% for c in obj %}
+          <div class="card">
+            {% if c.photo %}
+            <img class="card-img-top" src="{{c.photo.url}}" alt="Card image cap">
+            {% endif %}
+            <div class="card-body" style="margin-bottom: 0px">
+              <div class="card-title">
+                <h5>
+                  <a href="{% url 'member' c.slug %}">
+                    {{ c.name }}
+                  </a>
+                </h5>
+                {% for proff in c.professions.all %}
+                  <span class="badge badge-dark">
+                    {{proff.title}} 
+                  </span>      
+                {% endfor %}
+              </div>
+              <p class="card-text" style="margin-bottom: 0px">
+
+                {% if c.info %}
+                {{ c.info }}
+                {% endif %}
+              </p>
+                <hr>
+                Команды:
+                {% for team in c.teams.all %}
+                  <br/>{{team.title}}
+                {% endfor %}
+              
+            </div>
+            {% if c.link %}
+            <div class="card-footer">
+              <small class="text-muted">
+                
+                  <a href="{{ c.link }}">{{ c.link }}</a>
+                
+              </small>
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </section>
+
 {% endblock %}

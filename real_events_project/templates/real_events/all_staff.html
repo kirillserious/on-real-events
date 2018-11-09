@@ -6,7 +6,6 @@
     Весь стафф
 {% endblock %}
 
-{% block header_image %}{%static 'img/bg-signup.jpg'%}{% endblock %}
 {% block header_min_height %}15em{% endblock %}
 {% block header_height %}auto{% endblock %}
 {% block header_content %}
@@ -16,18 +15,40 @@
 {% endblock %}
 
 {% block body_block %}
-    {% for c in obj %}
-    <div>
-        <a href="{% url 'staff' c.slug %}">{{ c.name }}</a>
-        {% if c.link %}
-            {{ c.link }}
-        {% endif %}
-        {% if c.photo %}
-            <img src="{{c.photo.url}}" />
-        {% endif %}
-        {% if c.info %}
-            {{ c.info }}
-        {% endif %}
-    </div>
-    {% endfor %}
+<section id="about" class="about-section text-center" style="padding-top: 0rem">
+      <div class="container">
+        <div class="card-columns" style="padding-top: 3rem; opacity: 0.9">
+          {% for c in obj %}
+          <div class="card">
+            {% if c.photo %}
+            <img class="card-img-top" src="{{c.photo.url}}" alt="Card image cap">
+            {% endif %}
+            <div class="card-body" style="margin-bottom: 0px">
+              <div class="card-title">
+                <h5>
+                  <a href="{% url 'staff' c.slug %}">
+                    {{ c.name }}
+                  </a>
+                </h5>
+              </div>
+              <p class="card-text" style="margin-bottom: 0px">
+
+                {% if c.info %}
+                {{ c.info }}
+                {% endif %}
+              </p>
+            </div>
+            {% if c.link %}
+            <div class="card-footer">
+              <small class="text-muted">
+                  <a href="{{ c.link }}">{{ c.link }}</a>
+              </small>
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </section>
 {% endblock %}

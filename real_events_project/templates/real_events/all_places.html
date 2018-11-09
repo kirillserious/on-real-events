@@ -6,7 +6,6 @@
     Все площадки
 {% endblock %}
 
-{% block header_image %}{%static 'img/bg-signup.jpg'%}{% endblock %}
 {% block header_min_height %}15em{% endblock %}
 {% block header_height %}auto{% endblock %}
 {% block header_content %}
@@ -16,21 +15,54 @@
 {% endblock %}
 
 {% block body_block %}
-    {% for c in obj %}
+    <section id="projects" class="projects-section bg-light">
+      <div class="container">
+
+        <!-- Featured Project Row -->
+        {% for c in obj %}
+        <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          {% if c.photo %}
+          <div class="col-xl-8 col-lg-7">
+            <img class="img-fluid mb-3 mb-lg-0" src="{{c.photo.url}}" alt="">
+          </div>
+          {% endif %}
+          <div class="col-xl-4 col-lg-5">
+            <div class="featured-text text-center text-lg-left">
+              <h4><a href="{% url 'place' c.slug %}">{{ c.title }}</a></h4>
+              <p class="text-black-50 mb-0">
+                {% if c.address %}
+                <span class="badge badge-pill badge-dark">
+                  {{ c.address }}
+                </span>
+                {% endif %}
+                <br />
+                {% if c.city %}
+                <span class="badge badge-pill badge-dark">
+                  {{ c.city }}
+                </span>
+                {% endif %}
+                <br />
+                {% if c.info %}
+                  {{ c.info }}
+                {% endif %}
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    
     <div>
-        <a href="{% url 'place' c.slug %}">{{ c.title }}</a>
-        {% if c.photo %}
-            <img src="{{c.photo.url}}" />
-        {% endif %}
-        {% if c.address %}
-            {{ c.address }}
-        {% endif %}
-        {% if c.city %}
-            {{ c.city }}
-        {% endif %}
-        {% if c.info %}
-            {{ c.info }}
-        {% endif %}
-    </div>
-    {% endfor %}
+        
+        
+           
+        
+        
+
+        
+            
+        
+
 {% endblock %}
