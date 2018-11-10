@@ -15,47 +15,44 @@
 {% endblock %}
 
 {% block body_block %}
-  {% for c in obj %}
-<section style="padding-top: 0rem;" class="overlay">
 
-  {% if c.photo %}
-  <div class="background-img" style="background:url({{c.photo.url}});background-position:center;background-repeat:no-repeat;background-attachment:scroll;background-size:cover; min-height: 30em">
-    <div class="container">
-    <div class="row">
-      <div class="col-md-5" style="margin: 20px">
-        <div class="block-content front-p shadow"  style="background-color:white; opacity: 0.8; border:0;border-bottom:.25rem solid #64a19d">
-            <h1><a href="{% url 'news_post' c.slug %}">{{ c.title }}</a></h1>
-        {% for place in c.places.all %}
-            <b>{{place.title}} </b>
-        {% endfor %}
-        {{ c.date }}
-        {% if c.info %}
-            {{ c.info }}
-        {% endif %}
+<section id="projects" class="projects-section bg-light">
+      <div class="container">
+
+        <!-- Featured Project Row -->
+        {% for c in obj %}
+        <div class="row no-gutters mb-4 mb-lg-5">
+          {% if c.photo %}
+          <div class="col-xl-5 col-lg-6">
+            <img class="img-fluid mb-3 mb-lg-0" src="{{c.photo.url}}" alt="">
+          </div>
+          {% endif %}
+          <div class="col-xl-7 col-lg-6">
+            <div class="featured-text text-center text-lg-left">
+              <h4><a href="{% url 'news_post' c.slug %}">{{ c.title }}</a></h4>
+              <p class="text-black-50 mb-0">
+                {% if c.date %}
+                <span class="badge badge-pill badge-dark">
+                  {{ c.date }}
+                </span>
+                {% endif %}
+                <br />
+                {% for place in c.places.all %}
+                <span class="badge badge-pill badge-dark">
+                  {{ c.place.title }}
+                </span>
+                <br />
+                {% endfor %}
+                
+                {% if c.info %}
+                  {{ c.info }}
+                {% endif %}
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  {% endif %}
-  
-
-</section>
-  {% endfor %}
-<!--
-    {% for c in obj %}
-    <div>
-        <a href="{% url 'news_post' c.slug %}">{{ c.title }}</a>
-        {% for place in c.places.all %}
-            <b>{{place.title}} </b>
         {% endfor %}
-        {{ c.date }}
-        {% if c.photo %}
-            <img src="{{c.photo.url}}" />
-        {% endif %}
-        {% if c.info %}
-            {{ c.info }}
-        {% endif %}
-    </div>
-    {% endfor %}-->
+      </div>
+    </section>
+
 {% endblock %}

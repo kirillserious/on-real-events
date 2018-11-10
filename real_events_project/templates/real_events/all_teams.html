@@ -15,19 +15,69 @@
 {% endblock %}
 
 {% block body_block %}
-    {% for c in obj %}
-    <div>
-        <a href="{% url 'team' c.slug %}">{{ c.title }}</a>
-        {% for meeting in c.meetings.all %}
-            <b>{{meeting.title}} </b>
-        {% endfor %}
-        <br/>
-        {% if c.photo %}
-            <img src="{{c.photo.url}}" />
-        {% endif %}
-        {% if c.info %}
-            {{ c.info }}
-        {% endif %}
-    </div>
-    {% endfor %}
+
+<style type="text/css">
+.my-img {
+  display: none;
+}
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 992px) {
+    .card-columns {
+        column-count: 2;
+    }
+    .my-img {
+      display: inline;
+    }
+}
+</style>
+
+<section id="about" class="about-section text-center" style="padding-top: 5rem;">
+      <div class="container">
+        <div class="card-columns">
+          {% for c in obj %}
+          <div class="card shadow">
+            {% if c.photo %}
+            <img class="card-img-top" src="{{c.photo.url}}">
+            {% endif %}
+            <div class="card-body" style="margin-bottom: 0px">
+              <div class="card-title">
+                <h5>
+                  <a href="{% url 'team' c.slug %}">{{ c.title }}</a>
+                </h5>
+              </div>
+              <div class="social d-flex justify-content-center">
+              {% for member in c.member_set.all %}
+                <div style="margin: 5px; padding: 5px; width: 120px; overflow: hidden;" >
+                  {% if member.photo %}
+                  <img class="my-img"style="border-radius: 50%; width: 100px; height: 100px; border: 2px solid #64a19d;" src="{{member.photo.url}}" />
+                  {% endif %}
+                  <a href="{% url 'member' member.slug %}" class="badge badge-dark">{{ member.name }}</a>
+                </div>
+              {% endfor %}
+            </div>
+              <p class="card-text" style="margin-bottom: 0px">
+                {% if c.info %}
+                {{ c.info }}
+                {% endif %}
+              </p>
+            </div>
+            
+            </div>
+              
+
+          {% endfor %}
+        </div>
+
+      </div>
+    </section>
+
 {% endblock %}
+
+
+
+
