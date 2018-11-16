@@ -9,6 +9,19 @@
 {% block header_min_height %}15em{% endblock %}
 {% block header_height %}auto{% endblock %}
 {% block header_content %}
+<style>
+  #small-choise{
+    display: none;
+  }
+  @media (max-width: 576px) {
+    #big-choise{
+      display: none;
+    }
+    #small-choise{
+      display: block;
+    }
+  }
+</style>
 <h1 class="mx-auto my-0 text-uppercase" style="padding-top: 1em">
     Участники
 </h1>
@@ -17,7 +30,21 @@
 {% block body_block %}
 <section id="about" class="about-section text-center" style="padding-top: 5rem;">
       <div class="container">
-        <div class="btn-group" role="group" aria-label="Basic example" style="opacity: 0.6">
+        <div id="big-choise" class="btn-group" role="group" aria-label="Basic example" style="opacity: 0.6">
+          <a
+              class="btn {% if request.GET.proff == 'poet'%} btn-primary {% else %} btn-light {% endif %}"
+              href="{% url 'all_members' %}?proff=poet">
+            Поэты
+          </a>
+          <a class="btn {% if request.GET.proff == 'actor'%} btn-primary {% else %} btn-light {% endif %}" href="{% url 'all_members'%}?proff=actor">
+            Актёры
+          </a>
+          <a class="btn {% if request.GET.proff == 'director'%} btn-primary {% else %} btn-light {% endif %}" href="{% url 'all_members' %}?proff=director">
+            Режиссеры
+          </a>
+        </div>
+
+        <div id="small-choise" class="btn-group-vertical" role="group" aria-label="Basic example" style="opacity: 0.6">
           <a
               class="btn {% if request.GET.proff == 'poet'%} btn-primary {% else %} btn-light {% endif %}"
               href="{% url 'all_members' %}?proff=poet">
