@@ -14,7 +14,7 @@ def index(request):
 
 def all_news(request):
     context_dict = {}
-    context_dict['obj'] = NewsPost.objects.all()
+    context_dict['obj'] = NewsPost.objects.all().order_by('-date')
     return render(request, 'real_events/all_news.html', context_dict)
 def news_post(request, slug):
     context_dict = {}
